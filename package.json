@@ -30,13 +30,15 @@
     "typecheck": "pnpm -r --parallel typecheck",
     "package:check": "pnpm -r --parallel package:check",
     
-    "test": "pnpm run test:rust && pnpm -r --parallel test",
+    "test": "pnpm run test:rust && pnpm run test:ts",
+    "test:ts": "pnpm -r --parallel test:run",
     "test:rust": "cargo test --workspace",
     "test:utils": "pnpm --filter @internal/utils test",
     "test:app": "pnpm --filter app test",
     "test:run": "pnpm -r --parallel test:run",
     "test:ui": "pnpm --filter app test:ui",
     "test:coverage": "pnpm -r --parallel test:coverage",
+    "test:watch": "pnpm -r --parallel test",
     
     "install:all": "pnpm run build:wasm && pnpm install",
     "setup": "pnpm run install:all",

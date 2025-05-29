@@ -29,10 +29,10 @@ describe('MathCalculator', () => {
   it('コンポーネントが正しくレンダリングされる', () => {
     render(<MathCalculator />)
 
-    expect(screen.getByText('数学計算 (wasm-math)')).toBeInTheDocument()
-    expect(screen.getByText('基本四則演算')).toBeInTheDocument()
-    expect(screen.getByText('平方根')).toBeInTheDocument()
-    expect(screen.getByText('累乗')).toBeInTheDocument()
+    expect(screen.getByText('数学計算 (wasm-math)')).toBeTruthy()
+    expect(screen.getByText('基本四則演算')).toBeTruthy()
+    expect(screen.getByText('平方根')).toBeTruthy()
+    expect(screen.getByText('累乗')).toBeTruthy()
   })
 
   it('足し算が正しく実行される', async () => {
@@ -54,8 +54,8 @@ describe('MathCalculator', () => {
 
     // 結果が表示されることを確認
     await waitFor(() => {
-      expect(screen.getByText(/15 \+ 25/)).toBeInTheDocument()
-      expect(screen.getByText(/= 40/)).toBeInTheDocument()
+      expect(screen.getByText(/15 \+ 25/)).toBeTruthy()
+      expect(screen.getByText(/= 40/)).toBeTruthy()
     })
   })
 
@@ -76,7 +76,7 @@ describe('MathCalculator', () => {
     await waitFor(() => {
       expect(
         screen.getByText(/有効な数値を入力してください/)
-      ).toBeInTheDocument()
+      ).toBeTruthy()
     })
   })
 
@@ -85,7 +85,6 @@ describe('MathCalculator', () => {
     render(<MathCalculator />)
 
     // 除算用の値を設定（0で除算）
-    const num1Input = screen.getByDisplayValue('10')
     const num2Input = screen.getByDisplayValue('5')
 
     await user.clear(num2Input)
@@ -99,7 +98,7 @@ describe('MathCalculator', () => {
     await waitFor(() => {
       expect(
         screen.getByText(/0で除算することはできません/)
-      ).toBeInTheDocument()
+      ).toBeTruthy()
     })
   })
 
@@ -118,8 +117,8 @@ describe('MathCalculator', () => {
 
     // 結果が表示されることを確認
     await waitFor(() => {
-      expect(screen.getByText(/√25/)).toBeInTheDocument()
-      expect(screen.getByText(/= 5.0000/)).toBeInTheDocument()
+      expect(screen.getByText(/√25/)).toBeTruthy()
+      expect(screen.getByText(/= 5.0000/)).toBeTruthy()
     })
   })
 
@@ -142,8 +141,8 @@ describe('MathCalculator', () => {
 
     // 結果が表示されることを確認
     await waitFor(() => {
-      expect(screen.getByText(/5\^2/)).toBeInTheDocument()
-      expect(screen.getByText(/= 25/)).toBeInTheDocument()
+      expect(screen.getByText(/5\^2/)).toBeTruthy()
+      expect(screen.getByText(/= 25/)).toBeTruthy()
     })
   })
 
@@ -160,7 +159,7 @@ describe('MathCalculator', () => {
 
     // 履歴セクションが表示されることを確認
     await waitFor(() => {
-      expect(screen.getByText('計算結果')).toBeInTheDocument()
+      expect(screen.getByText('計算結果')).toBeTruthy()
       // 最新の結果が上に来ることを確認
       const results = screen.getAllByText(/= \d+/)
       expect(results.length).toBeGreaterThan(1)

@@ -48,11 +48,11 @@ describe('UtilityTools', () => {
   it('コンポーネントが正しくレンダリングされる', () => {
     render(<UtilityTools />)
 
-    expect(screen.getByText('ユーティリティ (wasm-utils)')).toBeInTheDocument()
-    expect(screen.getByText('乱数生成')).toBeInTheDocument()
-    expect(screen.getByText('数値の性質チェック')).toBeInTheDocument()
-    expect(screen.getByText('フィボナッチ数列')).toBeInTheDocument()
-    expect(screen.getByText('最大公約数 (GCD)')).toBeInTheDocument()
+    expect(screen.getByText('ユーティリティ (wasm-utils)')).toBeTruthy()
+    expect(screen.getByText('乱数生成')).toBeTruthy()
+    expect(screen.getByText('数値の性質チェック')).toBeTruthy()
+    expect(screen.getByText('フィボナッチ数列')).toBeTruthy()
+    expect(screen.getByText('最大公約数 (GCD)')).toBeTruthy()
   })
 
   it('乱数生成が正しく動作する', async () => {
@@ -74,8 +74,8 @@ describe('UtilityTools', () => {
 
     // 生成履歴が表示されることを確認
     await waitFor(() => {
-      expect(screen.getByText('生成履歴:')).toBeInTheDocument()
-      expect(screen.getByText('10-20')).toBeInTheDocument()
+      expect(screen.getByText('生成履歴:')).toBeTruthy()
+      expect(screen.getByText('10-20')).toBeTruthy()
     })
   })
 
@@ -100,7 +100,7 @@ describe('UtilityTools', () => {
     await waitFor(() => {
       expect(
         screen.getByText(/最小値は最大値より小さくしてください/)
-      ).toBeInTheDocument()
+      ).toBeTruthy()
     })
   })
 
@@ -158,7 +158,7 @@ describe('UtilityTools', () => {
     await user.click(fibButton)
 
     await waitFor(() => {
-      expect(screen.getByText(/F\(5\) = 5/)).toBeInTheDocument()
+      expect(screen.getByText(/F\(5\) = 5/)).toBeTruthy()
     })
   })
 
@@ -175,7 +175,7 @@ describe('UtilityTools', () => {
     await user.click(fibButton)
 
     await waitFor(() => {
-      expect(screen.getByText(/数値が大きすぎます/)).toBeInTheDocument()
+      expect(screen.getByText(/数値が大きすぎます/)).toBeTruthy()
     })
   })
 
@@ -196,7 +196,7 @@ describe('UtilityTools', () => {
     await user.click(gcdButton)
 
     await waitFor(() => {
-      expect(screen.getByText(/GCD\(12, 8\) = 4/)).toBeInTheDocument()
+      expect(screen.getByText(/GCD\(12, 8\) = 4/)).toBeTruthy()
     })
   })
 
@@ -215,7 +215,7 @@ describe('UtilityTools', () => {
     await waitFor(() => {
       expect(
         screen.getByText(/有効な整数を入力してください/)
-      ).toBeInTheDocument()
+      ).toBeTruthy()
     })
   })
 
@@ -234,7 +234,7 @@ describe('UtilityTools', () => {
     await waitFor(() => {
       expect(
         screen.getByText(/0以上の整数を入力してください/)
-      ).toBeInTheDocument()
+      ).toBeTruthy()
     })
   })
 
@@ -250,7 +250,7 @@ describe('UtilityTools', () => {
     await user.click(generateButton)
 
     await waitFor(() => {
-      expect(screen.getByText('生成履歴:')).toBeInTheDocument()
+      expect(screen.getByText('生成履歴:')).toBeTruthy()
       // 複数の結果が表示されることを確認
       const historyItems = screen.getAllByText('1-100')
       expect(historyItems.length).toBe(3)

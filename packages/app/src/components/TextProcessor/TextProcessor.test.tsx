@@ -31,11 +31,11 @@ describe('TextProcessor', () => {
   it('コンポーネントが正しくレンダリングされる', () => {
     render(<TextProcessor />)
 
-    expect(screen.getByText('テキスト処理 (wasm-text)')).toBeInTheDocument()
+    expect(screen.getByText('テキスト処理 (wasm-text)')).toBeTruthy()
     expect(
       screen.getByPlaceholderText('ここにテキストを入力...')
-    ).toBeInTheDocument()
-    expect(screen.getByText('サンプルテキスト:')).toBeInTheDocument()
+    ).toBeTruthy()
+    expect(screen.getByText('サンプルテキスト:')).toBeTruthy()
   })
 
   it('初期テキストが自動的に処理される', async () => {
@@ -44,9 +44,9 @@ describe('TextProcessor', () => {
     // デフォルトテキスト "Hello World!" の処理結果が表示されることを確認
     await waitFor(
       () => {
-        expect(screen.getByText('分析結果')).toBeInTheDocument()
-        expect(screen.getByText('12')).toBeInTheDocument() // 文字数
-        expect(screen.getByText('3')).toBeInTheDocument() // 母音数
+        expect(screen.getByText('分析結果')).toBeTruthy()
+        expect(screen.getByText('12')).toBeTruthy() // 文字数
+        expect(screen.getByText('3')).toBeTruthy() // 母音数
       },
       { timeout: 1000 }
     )
@@ -65,10 +65,10 @@ describe('TextProcessor', () => {
     // 処理結果が更新されることを確認（デバウンス後）
     await waitFor(
       () => {
-        expect(screen.getByText('分析結果')).toBeInTheDocument()
+        expect(screen.getByText('分析結果')).toBeTruthy()
         // "test"の分析結果
-        expect(screen.getByText('4')).toBeInTheDocument() // 文字数
-        expect(screen.getByText('1')).toBeInTheDocument() // 母音数 (e)
+        expect(screen.getByText('4')).toBeTruthy() // 文字数
+        expect(screen.getByText('1')).toBeTruthy() // 母音数 (e)
       },
       { timeout: 1000 }
     )
@@ -86,7 +86,7 @@ describe('TextProcessor', () => {
 
     await waitFor(
       () => {
-        expect(screen.getByText('回文です！')).toBeInTheDocument()
+        expect(screen.getByText('回文です！')).toBeTruthy()
       },
       { timeout: 1000 }
     )
@@ -104,7 +104,7 @@ describe('TextProcessor', () => {
 
     await waitFor(
       () => {
-        expect(screen.getByText('回文ではありません')).toBeInTheDocument()
+        expect(screen.getByText('回文ではありません')).toBeTruthy()
       },
       { timeout: 1000 }
     )
@@ -122,15 +122,15 @@ describe('TextProcessor', () => {
 
     await waitFor(
       () => {
-        expect(screen.getByText('分析結果')).toBeInTheDocument()
+        expect(screen.getByText('分析結果')).toBeTruthy()
 
         // 各変換結果が表示されることを確認
         const containers = screen.getAllByText('Hello')
         expect(containers.length).toBeGreaterThan(0)
 
-        expect(screen.getByText('olleH')).toBeInTheDocument() // 反転
-        expect(screen.getByText('HELLO')).toBeInTheDocument() // 大文字
-        expect(screen.getByText('hello')).toBeInTheDocument() // 小文字
+        expect(screen.getByText('olleH')).toBeTruthy() // 反転
+        expect(screen.getByText('HELLO')).toBeTruthy() // 大文字
+        expect(screen.getByText('hello')).toBeTruthy() // 小文字
       },
       { timeout: 1000 }
     )
@@ -146,12 +146,12 @@ describe('TextProcessor', () => {
 
     // テキストエリアにサンプルテキストが設定されることを確認
     const textarea = screen.getByDisplayValue('racecar')
-    expect(textarea).toBeInTheDocument()
+    expect(textarea).toBeTruthy()
 
     // 処理結果も更新されることを確認
     await waitFor(
       () => {
-        expect(screen.getByText('回文です！')).toBeInTheDocument()
+        expect(screen.getByText('回文です！')).toBeTruthy()
       },
       { timeout: 1000 }
     )
@@ -172,7 +172,7 @@ describe('TextProcessor', () => {
           screen.getByText(
             /テキストを入力すると、リアルタイムで分析結果が表示されます/
           )
-        ).toBeInTheDocument()
+        ).toBeTruthy()
       },
       { timeout: 1000 }
     )
@@ -192,7 +192,7 @@ describe('TextProcessor', () => {
     // （デバウンスのタイミングによっては表示されない場合もある）
     const processingText = screen.queryByText('処理中...')
     if (processingText) {
-      expect(processingText).toBeInTheDocument()
+      expect(processingText).toBeTruthy()
     }
   })
 })

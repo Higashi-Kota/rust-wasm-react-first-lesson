@@ -36,6 +36,10 @@
     "format": "biome format --write src",
     "package:check": "taze",
     "preview": "vite preview --port 5000",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui",
     "typecheck": "tsc --build --noEmit"
   },
   "type": "module",

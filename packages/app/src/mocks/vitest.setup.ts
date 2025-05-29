@@ -1,6 +1,4 @@
 // Vitestのテスト環境設定
-import '@testing-library/jest-dom'
-
 import { vi } from 'vitest'
 
 // WASMモジュールのモック（テスト時に使用）

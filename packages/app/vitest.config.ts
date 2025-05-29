@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 
 export default defineConfig({
   test: {
-    // テスト環境をNodeに設定
+    // テスト環境をjsdomに設定
     environment: 'jsdom',
 
     setupFiles: ['./src/mocks/vitest.setup.ts'],
@@ -11,15 +11,23 @@ export default defineConfig({
     // グローバルなテスト関数を有効化（describe, it, expect など）
     globals: true,
 
-    // テストファイルのパターン
-    include: ['src/**/*.{test,spec}.{js,ts}', 'tests/**/*.{test,spec}.{js,ts}'],
+    // テストファイルのパターン（.tsx/.jsx を追加）
+    include: [
+      'src/**/*.{test,spec}.{js,ts,jsx,tsx}', 
+      'tests/**/*.{test,spec}.{js,ts,jsx,tsx}'
+    ],
 
     // カバレッジ設定
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],
-      include: ['src/**/*.ts'],
-      exclude: ['src/**/*.test.ts', 'src/**/*.spec.ts', 'src/index.ts'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        'src/**/*.{test,spec}.{ts,tsx}', 
+        'src/index.ts',
+        'src/main.tsx',
+        'src/mocks/**'
+      ],
     },
   },
 
