@@ -1,0 +1,35 @@
+{
+  "name": "vite-react-typescript-starter",
+  "private": true,
+  "version": "0.0.0",
+  "workspaces": ["packages/*"],
+  "type": "module",
+  "scripts": {
+    "clean:modules": "find packages -type d -name node_modules -prune -exec rm -rf {} +",
+    "clean:build": "find packages -name '*.tsbuildinfo' -delete && find packages -type d -name dist -exec rm -rf {} +",
+    "clean:all": "pnpm run clean:build && rm -rf dist node_modules pnpm-lock.yaml && pnpm run clean:modules",
+    "reset": "pnpm run clean:all && pnpm install",
+    "dev": "pnpm --filter app dev",
+    "dev:dock": "pnpm --filter @internal/dock dev",
+    "dev:all": "concurrently \"pnpm dev:dock\" \"pnpm dev\" --names \"dock,app\" --prefix-colors \"blue,green\"",
+    "dev:watch": "concurrently \"pnpm --filter @internal/utils dev\" \"pnpm --filter @internal/dock dev:tsc\" \"pnpm --filter @internal/dock dev\" \"pnpm --filter app dev\" --names \"utils,tsc,dock,app\" --prefix-colors \"yellow,orange,blue,green\"",
+    "build": "pnpm build:utils && pnpm build:dock && pnpm -r build",
+    "build:utils": "pnpm --filter @internal/utils build",
+    "build:dock": "pnpm --filter @internal/dock build",
+    "preview": "pnpm -r preview",
+    "format": "pnpm -r --parallel format",
+    "check": "pnpm -r --parallel check",
+    "check:fix": "pnpm -r --parallel check:fix",
+    "typecheck": "pnpm -r --parallel typecheck",
+    "package:check": "pnpm -r --parallel package:check",
+    "test": "pnpm -r --parallel test",
+    "test:utils": "pnpm --filter @internal/utils test",
+    "test:run": "pnpm -r --parallel test:run",
+    "test:ui": "pnpm --filter @internal/utils test:ui",
+    "test:coverage": "pnpm -r --parallel test:coverage"
+  },
+  "devDependencies": {
+    "biome": "^0.3.3",
+    "concurrently": "^8.2.2"
+  }
+}
