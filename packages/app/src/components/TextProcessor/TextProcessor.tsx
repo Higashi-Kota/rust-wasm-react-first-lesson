@@ -122,7 +122,7 @@ export function TextProcessor() {
         {/* 処理中表示 */}
         {isProcessing && (
           <div className="flex items-center justify-center py-4">
-            <div className="w-6 h-6 border-b-2 border-blue-600 rounded-full animate-spin"></div>
+            <div className="w-6 h-6 border-b-2 border-blue-600 rounded-full animate-spin" />
             <span className="ml-2 text-gray-600">処理中...</span>
           </div>
         )}

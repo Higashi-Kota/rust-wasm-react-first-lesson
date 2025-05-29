@@ -16,7 +16,7 @@ vi.mock('@internal/wasm-math', async () => {
         return Promise.reject(new Error('0で除算することはできません'))
       return Promise.resolve(a / b)
     }),
-    pow: vi.fn((base: number, exp: number) => Math.pow(base, exp)),
+    pow: vi.fn((base: number, exp: number) => base ** exp),
     sqrt: vi.fn((x: number) => Math.sqrt(x)),
   }
 })

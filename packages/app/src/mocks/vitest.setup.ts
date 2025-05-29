@@ -11,7 +11,7 @@ vi.mock('@internal/wasm-math', () => ({
     if (b === 0) throw new Error('0で除算することはできません')
     return a / b
   }),
-  pow: vi.fn((base: number, exp: number) => Math.pow(base, exp)),
+  pow: vi.fn((base: number, exp: number) => base ** exp),
   sqrt: vi.fn((x: number) => Math.sqrt(x)),
 }))
 
@@ -47,8 +47,8 @@ vi.mock('@internal/wasm-utils', () => ({
   }),
   fibonacci: vi.fn((n: number) => {
     if (n <= 1) return n
-    let a = 0,
-      b = 1
+    let a = 0
+    let b = 1
     for (let i = 2; i <= n; i++) {
       ;[a, b] = [b, a + b]
     }

@@ -21,19 +21,19 @@ export function Footer() {
             </h4>
             <div className="space-y-2 text-sm">
               <div className="flex items-center">
-                <span className="w-2 h-2 mr-2 bg-orange-500 rounded-full"></span>
+                <span className="w-2 h-2 mr-2 bg-orange-500 rounded-full" />
                 <span>Rust + WebAssembly</span>
               </div>
               <div className="flex items-center">
-                <span className="w-2 h-2 mr-2 bg-blue-500 rounded-full"></span>
+                <span className="w-2 h-2 mr-2 bg-blue-500 rounded-full" />
                 <span>React + TypeScript</span>
               </div>
               <div className="flex items-center">
-                <span className="w-2 h-2 mr-2 bg-green-500 rounded-full"></span>
+                <span className="w-2 h-2 mr-2 bg-green-500 rounded-full" />
                 <span>Vite + TailwindCSS</span>
               </div>
               <div className="flex items-center">
-                <span className="w-2 h-2 mr-2 bg-purple-500 rounded-full"></span>
+                <span className="w-2 h-2 mr-2 bg-purple-500 rounded-full" />
                 <span>PNPM + Cargo Workspace</span>
               </div>
             </div>

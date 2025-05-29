@@ -38,10 +38,10 @@ export function UtilityTools() {
   const generateRandomNumber = () => {
     try {
       setError('')
-      const min = parseInt(randomMin)
-      const max = parseInt(randomMax)
+      const min = Number.parseInt(randomMin)
+      const max = Number.parseInt(randomMax)
 
-      if (isNaN(min) || isNaN(max)) {
+      if (Number.isNaN(min) || Number.isNaN(max)) {
         throw new Error('有効な数値を入力してください')
       }
 
@@ -65,9 +65,9 @@ export function UtilityTools() {
   const checkNumberProperties = () => {
     try {
       setError('')
-      const num = parseInt(checkNumber)
+      const num = Number.parseInt(checkNumber)
 
-      if (isNaN(num)) {
+      if (Number.isNaN(num)) {
         throw new Error('有効な整数を入力してください')
       }
 
@@ -85,9 +85,9 @@ export function UtilityTools() {
   const calculateFibonacci = () => {
     try {
       setError('')
-      const num = parseInt(fibNumber)
+      const num = Number.parseInt(fibNumber)
 
-      if (isNaN(num) || num < 0) {
+      if (Number.isNaN(num) || num < 0) {
         throw new Error('0以上の整数を入力してください')
       }
 
@@ -106,10 +106,10 @@ export function UtilityTools() {
   const calculateGCD = () => {
     try {
       setError('')
-      const a = parseInt(gcdA)
-      const b = parseInt(gcdB)
+      const a = Number.parseInt(gcdA)
+      const b = Number.parseInt(gcdB)
 
-      if (isNaN(a) || isNaN(b)) {
+      if (Number.isNaN(a) || Number.isNaN(b)) {
         throw new Error('有効な整数を入力してください')
       }
 

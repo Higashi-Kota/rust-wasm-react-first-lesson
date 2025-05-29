@@ -28,11 +28,11 @@ export function MathCalculator() {
   const handleCalculation = async (operation: string) => {
     try {
       setError('')
-      const a = parseInt(num1)
-      const b = parseInt(num2)
+      const a = Number.parseInt(num1)
+      const b = Number.parseInt(num2)
       let result: number | string
 
-      if (isNaN(a) || isNaN(b)) {
+      if (Number.isNaN(a) || Number.isNaN(b)) {
         throw new Error('有効な数値を入力してください')
       }
 
@@ -71,8 +71,8 @@ export function MathCalculator() {
   const handleSqrt = () => {
     try {
       setError('')
-      const num = parseFloat(singleNum)
-      if (isNaN(num) || num < 0) {
+      const num = Number.parseFloat(singleNum)
+      if (Number.isNaN(num) || num < 0) {
         throw new Error('有効な非負の数値を入力してください')
       }
       const result = sqrt(num)
@@ -85,9 +85,9 @@ export function MathCalculator() {
   const handlePow = () => {
     try {
       setError('')
-      const base = parseInt(powBase)
-      const exp = parseInt(powExp)
-      if (isNaN(base) || isNaN(exp) || exp < 0) {
+      const base = Number.parseInt(powBase)
+      const exp = Number.parseInt(powExp)
+      if (Number.isNaN(base) || Number.isNaN(exp) || exp < 0) {
         throw new Error('有効な数値を入力してください（指数は非負の整数）')
       }
       const result = pow(base, exp)
