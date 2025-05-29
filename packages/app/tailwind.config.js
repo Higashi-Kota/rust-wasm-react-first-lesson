@@ -6,6 +6,5 @@ export default {
   content: [
     './index.html', 
     './src/**/*.{js,ts,jsx,tsx}',
-    '../dock/src/**/*.{js,ts,jsx,tsx}'  // dock パッケージのスタイルも含める
   ],
 }
