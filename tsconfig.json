@@ -4,7 +4,6 @@
   "references": [
     { "path": "./packages/shared-config" },
     { "path": "./packages/utils" },
-    { "path": "./packages/dock" },
     { "path": "./packages/app" }
   ]
 }
