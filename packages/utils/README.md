@@ -126,7 +126,7 @@ packages/shared-config/
 ### プロジェクト別の使い分け
 
 ```bash
-# ライブラリパッケージ（utils, dock）
+# ライブラリパッケージ（utils）
 "extends": "@internal/shared-config/tsconfig-lib"
 
 # アプリケーション（app）
@@ -181,7 +181,6 @@ function toUserID(raw: string): UserID {
 
 ## 🔗 関連パッケージ
 
-- [`@internal/dock`](../dock) - このユーティリティを使用するドッキング UI ライブラリ
 - [`@internal/shared-config`](../shared-config) - 共通設定ファイル
 
 ---

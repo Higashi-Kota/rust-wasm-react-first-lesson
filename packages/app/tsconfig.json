@@ -4,12 +4,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@internal/dock": ["../dock/src/index.ts"],
-      "@internal/dock/*": ["../dock/src/*"],
       "@internal/utils": ["../utils/src/index.ts"],
       "@internal/utils/*": ["../utils/src/*"]
     }
   },
-  "include": ["src/**/*", "../dock/src/**/*", "../utils/src/**/*"],
+  "include": ["src/**/*", "../utils/src/**/*"],
   "exclude": ["dist", "node_modules"]
 }
