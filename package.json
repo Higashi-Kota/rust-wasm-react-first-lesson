@@ -52,6 +52,10 @@
     "node": ">=22.11.0",
     "pnpm": ">=10.11.0"
   },
+  "volta": {
+    "node": "22.11.0",
+    "pnpm": "10.11.0"
+  },
   "keywords": [
     "rust",
     "webassembly",
