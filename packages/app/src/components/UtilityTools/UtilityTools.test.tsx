@@ -154,7 +154,7 @@ describe('UtilityTools', () => {
     await user.clear(fibInput)
     await user.type(fibInput, '5')
 
-    const fibButton = screen.getByText('計算')
+    const fibButton = screen.getAllByText('計算')[0] // フィボナッチ用の計算ボタン（最初の方）
     await user.click(fibButton)
 
     await waitFor(() => {
@@ -171,7 +171,7 @@ describe('UtilityTools', () => {
     await user.clear(fibInput)
     await user.type(fibInput, '100')
 
-    const fibButton = screen.getByText('計算')
+    const fibButton = screen.getAllByText('計算')[0] // フィボナッチ用の計算ボタン（最初の方）
     await user.click(fibButton)
 
     await waitFor(() => {
@@ -228,7 +228,7 @@ describe('UtilityTools', () => {
     await user.clear(fibInput)
     await user.type(fibInput, '-5')
 
-    const fibButton = screen.getByText('計算')
+    const fibButton = screen.getAllByText('計算')[0] // フィボナッチ用の計算ボタン（最初の方）
     await user.click(fibButton)
 
     await waitFor(() => {
