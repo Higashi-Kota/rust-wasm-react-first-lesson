@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { TextProcessor } from './TextProcessor'
 
 // WASMモジュールのモック
@@ -32,9 +32,7 @@ describe('TextProcessor', () => {
     render(<TextProcessor />)
 
     expect(screen.getByText('テキスト処理 (wasm-text)')).toBeTruthy()
-    expect(
-      screen.getByPlaceholderText('ここにテキストを入力...')
-    ).toBeTruthy()
+    expect(screen.getByPlaceholderText('ここにテキストを入力...')).toBeTruthy()
     expect(screen.getByText('サンプルテキスト:')).toBeTruthy()
   })
 

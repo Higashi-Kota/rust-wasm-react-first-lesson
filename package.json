@@ -24,8 +24,12 @@
     "build:utils": "pnpm --filter @internal/utils build",
     
     "preview": "pnpm -r preview",
-    "format": "pnpm -r --parallel format",
-    "check": "pnpm -r --parallel check",
+    "format": "pnpm run format:rust && pnpm run format:ts",
+    "format:ts": "pnpm -r --parallel format",
+    "format:rust": "cargo fmt --all",
+    "check": "pnpm run check:rust && pnpm run check:ts",
+    "check:ts": "pnpm -r --parallel check",
+    "check:rust": "cargo clippy --workspace --all-targets -- -D warnings",
     "check:fix": "pnpm -r --parallel check:fix",
     "typecheck": "pnpm -r --parallel typecheck",
     "package:check": "pnpm -r --parallel package:check",
@@ -43,8 +47,7 @@
     "install:all": "pnpm run build:wasm && pnpm install",
     "setup": "pnpm run install:all",
     
-    "lint:rust": "cargo clippy --workspace --all-targets -- -D warnings",
-    "format:rust": "cargo fmt --all"
+    "lint:rust": "cargo clippy --workspace --all-targets -- -D warnings"
   },
   "devDependencies": {
     "biome": "^0.3.3",

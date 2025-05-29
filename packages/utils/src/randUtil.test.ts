@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { gnrng, createId, createIdBySeed } from './randUtil'
+import { describe, expect, it } from 'vitest'
+import { createId, createIdBySeed, gnrng } from './randUtil'
 
 describe('gnrng', () => {
   it('should return a function', () => {

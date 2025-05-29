@@ -1,5 +1,5 @@
-use wasm_bindgen::prelude::*;
 use js_sys::Math;
+use wasm_bindgen::prelude::*;
 
 #[cfg(feature = "wee_alloc")]
 #[global_allocator]
@@ -22,11 +22,11 @@ fn set_panic_hook() {
 #[wasm_bindgen]
 pub fn random_between(min: i32, max: i32) -> i32 {
     set_panic_hook();
-    
+
     if min >= max {
         return min;
     }
-    
+
     let range = max - min;
     let random_value = Math::random() * range as f64;
     min + random_value as i32
@@ -38,16 +38,20 @@ fn random_between_internal(min: i32, max: i32) -> i32 {
     use std::collections::hash_map::DefaultHasher;
     use std::hash::{Hash, Hasher};
     use std::time::{SystemTime, UNIX_EPOCH};
-    
+
     if min >= max {
         return min;
     }
-    
+
     // テスト用の簡単な疑似乱数生成
     let mut hasher = DefaultHasher::new();
-    SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos().hash(&mut hasher);
+    SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap()
+        .as_nanos()
+        .hash(&mut hasher);
     let hash = hasher.finish();
-    
+
     let range = max - min;
     min + (hash % range as u64) as i32
 }
@@ -70,26 +74,26 @@ pub fn is_odd(n: i32) -> bool {
 #[wasm_bindgen]
 pub fn is_prime(n: i32) -> bool {
     set_panic_hook();
-    
+
     if n < 2 {
         return false;
     }
-    
+
     if n == 2 {
         return true;
     }
-    
+
     if n % 2 == 0 {
         return false;
     }
-    
+
     let sqrt_n = (n as f64).sqrt() as i32;
     for i in (3..=sqrt_n).step_by(2) {
         if n % i == 0 {
             return false;
         }
     }
-    
+
     true
 }
 
@@ -97,20 +101,20 @@ pub fn is_prime(n: i32) -> bool {
 #[wasm_bindgen]
 pub fn fibonacci(n: u32) -> u64 {
     set_panic_hook();
-    
+
     if n <= 1 {
         return n as u64;
     }
-    
+
     let mut a = 0u64;
     let mut b = 1u64;
-    
+
     for _ in 2..=n {
         let temp = a + b;
         a = b;
         b = temp;
     }
-    
+
     b
 }
 
@@ -118,16 +122,16 @@ pub fn fibonacci(n: u32) -> u64 {
 #[wasm_bindgen]
 pub fn gcd(a: i32, b: i32) -> i32 {
     set_panic_hook();
-    
+
     let mut a = a.abs();
     let mut b = b.abs();
-    
+
     while b != 0 {
         let temp = b;
         b = a % b;
         a = temp;
     }
-    
+
     a
 }
 
@@ -192,7 +196,7 @@ mod tests {
         // エッジケースのテスト（Math::randomを使わない）
         assert_eq!(random_between_internal(5, 5), 5);
         assert_eq!(random_between_internal(10, 5), 10);
-        
+
         // 範囲のテスト
         for _ in 0..10 {
             let result = random_between_internal(1, 10);

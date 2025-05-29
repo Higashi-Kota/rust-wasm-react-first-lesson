@@ -1,5 +1,5 @@
+import { add, div, mul, pow, sqrt, sub } from '@internal/wasm-math'
 import { useState } from 'react'
-import { add, sub, mul, div, pow, sqrt } from '@internal/wasm-math'
 
 interface CalculationResult {
   operation: string
@@ -56,7 +56,7 @@ export function MathCalculator() {
               `${a} ÷ ${b}`,
               typeof result === 'number' ? result.toFixed(4) : result
             )
-          } catch (divError) {
+          } catch (_divError) {
             throw new Error('0で除算することはできません')
           }
           break

@@ -28,7 +28,7 @@ pub fn reverse(s: &str) -> String {
 #[wasm_bindgen]
 pub fn count_vowels(s: &str) -> usize {
     set_panic_hook();
-    
+
     let vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
     s.chars().filter(|c| vowels.contains(c)).count()
 }
@@ -58,12 +58,13 @@ pub fn char_count(s: &str) -> usize {
 #[wasm_bindgen]
 pub fn is_palindrome(s: &str) -> bool {
     set_panic_hook();
-    
-    let cleaned: String = s.chars()
+
+    let cleaned: String = s
+        .chars()
         .filter(|c| c.is_alphanumeric())
         .map(|c| c.to_lowercase().next().unwrap())
         .collect();
-    
+
     cleaned == cleaned.chars().rev().collect::<String>()
 }
 

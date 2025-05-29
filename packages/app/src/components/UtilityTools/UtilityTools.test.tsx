@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { UtilityTools } from './UtilityTools'
 
 // WASMモジュールのモック
@@ -213,9 +213,7 @@ describe('UtilityTools', () => {
     await user.click(checkButton)
 
     await waitFor(() => {
-      expect(
-        screen.getByText(/有効な整数を入力してください/)
-      ).toBeTruthy()
+      expect(screen.getByText(/有効な整数を入力してください/)).toBeTruthy()
     })
   })
 
@@ -232,9 +230,7 @@ describe('UtilityTools', () => {
     await user.click(fibButton)
 
     await waitFor(() => {
-      expect(
-        screen.getByText(/0以上の整数を入力してください/)
-      ).toBeTruthy()
+      expect(screen.getByText(/0以上の整数を入力してください/)).toBeTruthy()
     })
   })
 

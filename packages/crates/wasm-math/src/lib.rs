@@ -50,7 +50,7 @@ pub fn mul(a: i32, b: i32) -> i32 {
 #[wasm_bindgen]
 pub fn div(a: i32, b: i32) -> Result<f64, JsValue> {
     set_panic_hook();
-    
+
     match div_internal(a, b) {
         Ok(result) => Ok(result),
         Err(msg) => Err(JsValue::from_str(msg)),
@@ -62,7 +62,7 @@ fn div_internal(a: i32, b: i32) -> Result<f64, &'static str> {
     if b == 0 {
         return Err("0で除算することはできません");
     }
-    
+
     Ok(a as f64 / b as f64)
 }
 

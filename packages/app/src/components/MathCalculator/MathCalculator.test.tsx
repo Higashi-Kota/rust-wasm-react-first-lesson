@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { MathCalculator } from './MathCalculator'
 
 // WASMモジュールのモック（setup.tsで定義済みだが、ここでも明示的に定義）
@@ -74,9 +74,7 @@ describe('MathCalculator', () => {
 
     // エラーメッセージが表示されることを確認
     await waitFor(() => {
-      expect(
-        screen.getByText(/有効な数値を入力してください/)
-      ).toBeTruthy()
+      expect(screen.getByText(/有効な数値を入力してください/)).toBeTruthy()
     })
   })
 
@@ -96,9 +94,7 @@ describe('MathCalculator', () => {
 
     // エラーメッセージが表示されることを確認
     await waitFor(() => {
-      expect(
-        screen.getByText(/0で除算することはできません/)
-      ).toBeTruthy()
+      expect(screen.getByText(/0で除算することはできません/)).toBeTruthy()
     })
   })
 

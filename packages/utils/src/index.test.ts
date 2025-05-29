@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { getName, gnrng, createId, createIdBySeed, type Brand } from './index'
+import { describe, expect, it } from 'vitest'
+import { type Brand, createId, createIdBySeed, getName, gnrng } from './index'
 
 describe('Index exports', () => {
   it('should export getName function', () => {

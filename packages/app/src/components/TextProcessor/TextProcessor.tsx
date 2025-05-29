@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react'
 import {
-  reverse,
-  count_vowels,
-  to_uppercase,
-  to_lowercase,
   char_count,
+  count_vowels,
   is_palindrome,
+  reverse,
+  to_lowercase,
+  to_uppercase,
 } from '@internal/wasm-text'
+import { useEffect, useState } from 'react'
 
 interface TextAnalysis {
   original: string

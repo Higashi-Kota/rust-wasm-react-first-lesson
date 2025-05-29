@@ -1,12 +1,12 @@
-import { useState } from 'react'
 import {
-  random_between,
+  fibonacci,
+  gcd,
   is_even,
   is_odd,
   is_prime,
-  fibonacci,
-  gcd,
+  random_between,
 } from '@internal/wasm-utils'
+import { useState } from 'react'
 
 interface RandomResult {
   value: number

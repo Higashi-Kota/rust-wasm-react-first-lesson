@@ -1,8 +1,8 @@
+import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { MathCalculator } from '@/components/MathCalculator'
 import { TextProcessor } from '@/components/TextProcessor'
 import { UtilityTools } from '@/components/UtilityTools'
-import { Footer } from '@/components/Footer'
 
 import { createIdBySeed } from '@internal/utils'
 
