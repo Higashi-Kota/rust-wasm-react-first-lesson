@@ -153,7 +153,11 @@ export function UtilityTools() {
                 placeholder="最大値"
               />
               <span className="text-gray-500">まで</span>
-              <button onClick={generateRandomNumber} className="btn-primary">
+              <button
+                type="button"
+                onClick={generateRandomNumber}
+                className="btn-primary"
+              >
                 生成
               </button>
             </div>
@@ -164,9 +168,9 @@ export function UtilityTools() {
                   生成履歴:
                 </p>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
-                  {randomResults.map((result, index) => (
+                  {randomResults.map((result) => (
                     <div
-                      key={index}
+                      key={`${result.value}-${result.timestamp.getTime()}`}
                       className="p-2 text-center border border-blue-200 rounded bg-blue-50"
                     >
                       <div className="font-bold text-blue-800">
@@ -198,7 +202,11 @@ export function UtilityTools() {
                 className="w-32 input"
                 placeholder="数値"
               />
-              <button onClick={checkNumberProperties} className="btn-secondary">
+              <button
+                type="button"
+                onClick={checkNumberProperties}
+                className="btn-secondary"
+              >
                 チェック
               </button>
             </div>
@@ -267,7 +275,11 @@ export function UtilityTools() {
                 max="50"
               />
               <span className="text-gray-600">) =</span>
-              <button onClick={calculateFibonacci} className="btn-secondary">
+              <button
+                type="button"
+                onClick={calculateFibonacci}
+                className="btn-secondary"
+              >
                 計算
               </button>
             </div>
@@ -307,7 +319,11 @@ export function UtilityTools() {
                 placeholder="B"
               />
               <span className="text-gray-600">) =</span>
-              <button onClick={calculateGCD} className="btn-secondary">
+              <button
+                type="button"
+                onClick={calculateGCD}
+                className="btn-secondary"
+              >
                 計算
               </button>
             </div>

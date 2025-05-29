@@ -6,7 +6,7 @@ import {
   to_lowercase,
   to_uppercase,
 } from '@internal/wasm-text'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 interface TextAnalysis {
   original: string
@@ -23,7 +23,7 @@ export function TextProcessor() {
   const [analysis, setAnalysis] = useState<TextAnalysis | null>(null)
   const [isProcessing, setIsProcessing] = useState<boolean>(false)
 
-  const processText = async () => {
+  const processText = useCallback(async () => {
     if (!inputText.trim()) {
       setAnalysis(null)
       return
@@ -62,7 +62,7 @@ export function TextProcessor() {
     } finally {
       setIsProcessing(false)
     }
-  }
+  }, [inputText])
 
   // リアルタイム処理（デバウンス付き）
   useEffect(() => {
@@ -71,7 +71,7 @@ export function TextProcessor() {
     }, 300) // 300ms後に処理実行
 
     return () => clearTimeout(timer)
-  }, [inputText])
+  }, [processText])
 
   const exampleTexts = [
     'Hello World!',
@@ -92,10 +92,14 @@ export function TextProcessor() {
       <div className="space-y-6">
         {/* 入力エリア */}
         <div>
-          <label className="block mb-2 text-sm font-medium text-gray-700">
+          <label
+            htmlFor="text-input"
+            className="block mb-2 text-sm font-medium text-gray-700"
+          >
             処理するテキストを入力してください
           </label>
           <textarea
+            id="text-input"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             className="w-full h-24 resize-none input"
@@ -106,9 +110,10 @@ export function TextProcessor() {
           <div className="mt-3">
             <p className="mb-2 text-sm text-gray-500">サンプルテキスト:</p>
             <div className="flex flex-wrap gap-2">
-              {exampleTexts.map((text, index) => (
+              {exampleTexts.map((text) => (
                 <button
-                  key={index}
+                  key={text}
+                  type="button"
                   onClick={() => setInputText(text)}
                   className="px-2 py-1 text-xs transition-colors bg-gray-100 rounded hover:bg-gray-200"
                 >
@@ -170,36 +175,36 @@ export function TextProcessor() {
               {/* テキスト変換結果 */}
               <div className="space-y-3">
                 <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-700">
+                  <div className="block mb-1 text-sm font-medium text-gray-700">
                     元のテキスト:
-                  </label>
+                  </div>
                   <div className="p-3 font-mono text-sm border rounded bg-gray-50">
                     {analysis.original}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-700">
+                  <div className="block mb-1 text-sm font-medium text-gray-700">
                     反転:
-                  </label>
+                  </div>
                   <div className="p-3 font-mono text-sm border rounded bg-blue-50">
                     {analysis.reversed}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-700">
+                  <div className="block mb-1 text-sm font-medium text-gray-700">
                     大文字:
-                  </label>
+                  </div>
                   <div className="p-3 font-mono text-sm border rounded bg-green-50">
                     {analysis.uppercase}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-700">
+                  <div className="block mb-1 text-sm font-medium text-gray-700">
                     小文字:
-                  </label>
+                  </div>
                   <div className="p-3 font-mono text-sm border rounded bg-yellow-50">
                     {analysis.lowercase}
                   </div>

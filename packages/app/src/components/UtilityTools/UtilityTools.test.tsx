@@ -30,12 +30,12 @@ vi.mock('@internal/wasm-utils', async () => {
       return b
     }),
     gcd: vi.fn((a: number, b: number) => {
-      a = Math.abs(a)
-      b = Math.abs(b)
-      while (b !== 0) {
-        ;[a, b] = [b, a % b]
+      let absA = Math.abs(a)
+      let absB = Math.abs(b)
+      while (absB !== 0) {
+        ;[absA, absB] = [absB, absA % absB]
       }
-      return a
+      return absA
     }),
   }
 })
@@ -73,10 +73,13 @@ describe('UtilityTools', () => {
     await user.click(generateButton)
 
     // 生成履歴が表示されることを確認
-    await waitFor(() => {
-      expect(screen.getByText('生成履歴:')).toBeTruthy()
-      expect(screen.getByText('10-20')).toBeTruthy()
-    })
+    await waitFor(
+      () => {
+        expect(screen.getByText('生成履歴:')).toBeTruthy()
+        expect(screen.getByText('10-20')).toBeTruthy()
+      },
+      { timeout: 1000 }
+    )
   })
 
   it('乱数生成で無効な範囲を入力するとエラーが表示される', async () => {
@@ -97,11 +100,14 @@ describe('UtilityTools', () => {
     await user.click(generateButton)
 
     // エラーメッセージが表示されることを確認
-    await waitFor(() => {
-      expect(
-        screen.getByText(/最小値は最大値より小さくしてください/)
-      ).toBeTruthy()
-    })
+    await waitFor(
+      () => {
+        expect(
+          screen.getByText(/最小値は最大値より小さくしてください/)
+        ).toBeTruthy()
+      },
+      { timeout: 1000 }
+    )
   })
 
   it('数値の性質チェックが正しく動作する', async () => {
@@ -116,14 +122,17 @@ describe('UtilityTools', () => {
     const checkButton = screen.getByText('チェック')
     await user.click(checkButton)
 
-    await waitFor(() => {
-      const evenCells = screen.getAllByText('✅')
-      const oddCells = screen.getAllByText('❌')
+    await waitFor(
+      () => {
+        const evenCells = screen.getAllByText('✅')
+        const oddCells = screen.getAllByText('❌')
 
-      // 8は偶数なので、偶数にチェック、奇数にX、素数にXが入るはず
-      expect(evenCells.length).toBeGreaterThan(0)
-      expect(oddCells.length).toBeGreaterThan(0)
-    })
+        // 8は偶数なので、偶数にチェック、奇数にX、素数にXが入るはず
+        expect(evenCells.length).toBeGreaterThan(0)
+        expect(oddCells.length).toBeGreaterThan(0)
+      },
+      { timeout: 1000 }
+    )
   })
 
   it('素数が正しく判定される', async () => {
@@ -138,11 +147,14 @@ describe('UtilityTools', () => {
     const checkButton = screen.getByText('チェック')
     await user.click(checkButton)
 
-    await waitFor(() => {
-      // 7は奇数かつ素数
-      const checkResults = screen.getAllByText('✅')
-      expect(checkResults.length).toBe(2) // 奇数と素数でチェックマーク
-    })
+    await waitFor(
+      () => {
+        // 7は奇数かつ素数
+        const checkResults = screen.getAllByText('✅')
+        expect(checkResults.length).toBe(2) // 奇数と素数でチェックマーク
+      },
+      { timeout: 1000 }
+    )
   })
 
   it('フィボナッチ数列が正しく計算される', async () => {
@@ -157,9 +169,12 @@ describe('UtilityTools', () => {
     const fibButton = screen.getAllByText('計算')[0] // フィボナッチ用の計算ボタン（最初の方）
     await user.click(fibButton)
 
-    await waitFor(() => {
-      expect(screen.getByText(/F\(5\) = 5/)).toBeTruthy()
-    })
+    await waitFor(
+      () => {
+        expect(screen.getByText(/F\(5\) = 5/)).toBeTruthy()
+      },
+      { timeout: 1000 }
+    )
   })
 
   it('フィボナッチ数列で大きすぎる値を入力するとエラーが表示される', async () => {
@@ -174,9 +189,12 @@ describe('UtilityTools', () => {
     const fibButton = screen.getAllByText('計算')[0] // フィボナッチ用の計算ボタン（最初の方）
     await user.click(fibButton)
 
-    await waitFor(() => {
-      expect(screen.getByText(/数値が大きすぎます/)).toBeTruthy()
-    })
+    await waitFor(
+      () => {
+        expect(screen.getByText(/数値が大きすぎます/)).toBeTruthy()
+      },
+      { timeout: 1000 }
+    )
   })
 
   it('最大公約数が正しく計算される', async () => {
@@ -195,9 +213,12 @@ describe('UtilityTools', () => {
     const gcdButton = screen.getAllByText('計算')[1] // 2番目の計算ボタン（GCD用）
     await user.click(gcdButton)
 
-    await waitFor(() => {
-      expect(screen.getByText(/GCD\(12, 8\) = 4/)).toBeTruthy()
-    })
+    await waitFor(
+      () => {
+        expect(screen.getByText(/GCD\(12, 8\) = 4/)).toBeTruthy()
+      },
+      { timeout: 1000 }
+    )
   })
 
   it('無効な数値入力でエラーが表示される', async () => {
@@ -212,9 +233,12 @@ describe('UtilityTools', () => {
     const checkButton = screen.getByText('チェック')
     await user.click(checkButton)
 
-    await waitFor(() => {
-      expect(screen.getByText(/有効な整数を入力してください/)).toBeTruthy()
-    })
+    await waitFor(
+      () => {
+        expect(screen.getByText(/有効な整数を入力してください/)).toBeTruthy()
+      },
+      { timeout: 1000 }
+    )
   })
 
   it('負の値をフィボナッチ入力するとエラーが表示される', async () => {
@@ -229,9 +253,12 @@ describe('UtilityTools', () => {
     const fibButton = screen.getAllByText('計算')[0] // フィボナッチ用の計算ボタン（最初の方）
     await user.click(fibButton)
 
-    await waitFor(() => {
-      expect(screen.getByText(/0以上の整数を入力してください/)).toBeTruthy()
-    })
+    await waitFor(
+      () => {
+        expect(screen.getByText(/0以上の整数を入力してください/)).toBeTruthy()
+      },
+      { timeout: 1000 }
+    )
   })
 
   it('複数回の乱数生成で履歴が正しく表示される', async () => {
@@ -245,11 +272,14 @@ describe('UtilityTools', () => {
     await user.click(generateButton)
     await user.click(generateButton)
 
-    await waitFor(() => {
-      expect(screen.getByText('生成履歴:')).toBeTruthy()
-      // 複数の結果が表示されることを確認
-      const historyItems = screen.getAllByText('1-100')
-      expect(historyItems.length).toBe(3)
-    })
+    await waitFor(
+      () => {
+        expect(screen.getByText('生成履歴:')).toBeTruthy()
+        // 複数の結果が表示されることを確認
+        const historyItems = screen.getAllByText('1-100')
+        expect(historyItems.length).toBe(3)
+      },
+      { timeout: 1000 }
+    )
   })
 })

@@ -47,19 +47,19 @@ vi.mock('@internal/wasm-utils', () => ({
   }),
   fibonacci: vi.fn((n: number) => {
     if (n <= 1) return n
-    let a = 0
-    let b = 1
+    let prev = 0
+    let curr = 1
     for (let i = 2; i <= n; i++) {
-      ;[a, b] = [b, a + b]
+      ;[prev, curr] = [curr, prev + curr]
     }
-    return b
+    return curr
   }),
   gcd: vi.fn((a: number, b: number) => {
-    a = Math.abs(a)
-    b = Math.abs(b)
-    while (b !== 0) {
-      ;[a, b] = [b, a % b]
+    let absA = Math.abs(a)
+    let absB = Math.abs(b)
+    while (absB !== 0) {
+      ;[absA, absB] = [absB, absA % absB]
     }
-    return a
+    return absA
   }),
 }))

@@ -9,8 +9,8 @@ on:
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
-  NODE_VERSION: '22.11.0'
-  PNPM_VERSION: '10.11.0'
+  NODE_VERSION: "22.11.0"
+  PNPM_VERSION: "10.11.0"
 
 jobs:
   test-rust:
@@ -140,9 +140,8 @@ jobs:
       - name: TypeScript type check
         run: pnpm run typecheck
 
-      # 一旦スキップ
-      # - name: Code quality check
-      #   run: pnpm run check
+      - name: Code quality check
+        run: pnpm run check
 
       - name: Run frontend tests
         run: pnpm run test:run
@@ -330,13 +329,13 @@ jobs:
           echo "### PNPM Workspace" >> $GITHUB_STEP_SUMMARY
           pnpm list --depth=0 2>/dev/null || echo "PNPM packages will be listed after installation" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          
+
           echo "## Build Information" >> $GITHUB_STEP_SUMMARY
           echo "- Node.js: ${{ env.NODE_VERSION }}" >> $GITHUB_STEP_SUMMARY
           echo "- PNPM: ${{ env.PNPM_VERSION }}" >> $GITHUB_STEP_SUMMARY
           echo "- Rust: \$(rustc --version)" >> $GITHUB_STEP_SUMMARY
           echo "- WASM Target: wasm32-unknown-unknown" >> $GITHUB_STEP_SUMMARY
-          
+
           echo "## Dependency Verification" >> $GITHUB_STEP_SUMMARY
           echo "- Cargo.lock: $([ -f Cargo.lock ] && echo '✅ Present' || echo '❌ Missing')" >> $GITHUB_STEP_SUMMARY
           echo "- pnpm-lock.yaml: $([ -f pnpm-lock.yaml ] && echo '✅ Present' || echo '❌ Missing')" >> $GITHUB_STEP_SUMMARY

@@ -50,7 +50,7 @@
     "lint:rust": "cargo clippy --workspace --all-targets -- -D warnings"
   },
   "devDependencies": {
-    "biome": "^0.3.3",
+    "@biomejs/biome": "1.9.4",
     "concurrently": "^8.2.2"
   },
   "engines": {

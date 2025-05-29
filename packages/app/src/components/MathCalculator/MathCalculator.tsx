@@ -127,24 +127,28 @@ export function MathCalculator() {
           </div>
           <div className="flex flex-wrap gap-2">
             <button
+              type="button"
               onClick={() => handleCalculation('add')}
               className="btn-primary"
             >
               足し算 (+)
             </button>
             <button
+              type="button"
               onClick={() => handleCalculation('sub')}
               className="btn-primary"
             >
               引き算 (-)
             </button>
             <button
+              type="button"
               onClick={() => handleCalculation('mul')}
               className="btn-primary"
             >
               掛け算 (×)
             </button>
             <button
+              type="button"
               onClick={() => handleCalculation('div')}
               className="btn-primary"
             >
@@ -166,7 +170,11 @@ export function MathCalculator() {
               min="0"
               step="0.01"
             />
-            <button onClick={handleSqrt} className="btn-secondary">
+            <button
+              type="button"
+              onClick={handleSqrt}
+              className="btn-secondary"
+            >
               √ 平方根
             </button>
           </div>
@@ -193,7 +201,7 @@ export function MathCalculator() {
               min="0"
             />
             <span className="flex items-center text-gray-500">乗</span>
-            <button onClick={handlePow} className="btn-secondary">
+            <button type="button" onClick={handlePow} className="btn-secondary">
               計算
             </button>
           </div>
@@ -211,8 +219,11 @@ export function MathCalculator() {
           <div>
             <h4 className="mb-3 font-semibold text-gray-700">計算結果</h4>
             <div className="space-y-2">
-              {results.map((result, index) => (
-                <div key={index} className="result-display">
+              {results.map((result) => (
+                <div
+                  key={result.timestamp.getTime()}
+                  className="result-display"
+                >
                   <div className="flex items-center justify-between">
                     <span>
                       <strong>{result.operation}</strong> = {result.result}
