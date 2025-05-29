@@ -24,6 +24,11 @@ fn set_panic_hook() {
 #[wasm_bindgen]
 pub fn add(a: i32, b: i32) -> i32 {
     set_panic_hook();
+
+    // let result = a + b;
+
+    // log(&format!("[Hey]add({},{}) = {}",a,b,result));
+
     a + b
 }
 
@@ -46,8 +51,16 @@ pub fn mul(a: i32, b: i32) -> i32 {
 pub fn div(a: i32, b: i32) -> Result<f64, JsValue> {
     set_panic_hook();
     
+    match div_internal(a, b) {
+        Ok(result) => Ok(result),
+        Err(msg) => Err(JsValue::from_str(msg)),
+    }
+}
+
+/// 内部用の割り算関数（テスト用）
+fn div_internal(a: i32, b: i32) -> Result<f64, &'static str> {
     if b == 0 {
-        return Err(JsValue::from_str("0で除算することはできません"));
+        return Err("0で除算することはできません");
     }
     
     Ok(a as f64 / b as f64)
@@ -92,9 +105,9 @@ mod tests {
 
     #[test]
     fn test_div() {
-        assert!(div(10, 2).unwrap() - 5.0 < f64::EPSILON);
-        assert!(div(7, 3).unwrap() - 2.3333333333333335 < f64::EPSILON);
-        assert!(div(5, 0).is_err());
+        assert!((div_internal(10, 2).unwrap() - 5.0).abs() < f64::EPSILON);
+        assert!((div_internal(7, 3).unwrap() - 2.3333333333333335).abs() < f64::EPSILON);
+        assert!(div_internal(5, 0).is_err());
     }
 
     #[test]
@@ -106,49 +119,6 @@ mod tests {
     #[test]
     fn test_sqrt() {
         assert!((sqrt(16.0) - 4.0).abs() < f64::EPSILON);
-        assert!((sqrt(2.0) - 1.4142135623730951).abs() < f64::EPSILON);
-    }
-}
-
-// Rust側のユニットテスト
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_add() {
-        assert_eq!(add(2, 3), 5);
-        assert_eq!(add(-1, 1), 0);
-    }
-
-    #[test]
-    fn test_sub() {
-        assert_eq!(sub(5, 3), 2);
-        assert_eq!(sub(1, 5), -4);
-    }
-
-    #[test]
-    fn test_mul() {
-        assert_eq!(mul(3, 4), 12);
-        assert_eq!(mul(-2, 3), -6);
-    }
-
-    #[test]
-    fn test_div() {
-        assert!(div(10, 2).unwrap() - 5.0 < f64::EPSILON);
-        assert!(div(7, 3).unwrap() - 2.3333333333333335 < f64::EPSILON);
-        assert!(div(5, 0).is_err());
-    }
-
-    #[test]
-    fn test_pow() {
-        assert_eq!(pow(2, 3), 8);
-        assert_eq!(pow(5, 2), 25);
-    }
-
-    #[test]
-    fn test_sqrt() {
-        assert!((sqrt(16.0) - 4.0).abs() < f64::EPSILON);
-        assert!((sqrt(2.0) - 1.4142135623730951).abs() < f64::EPSILON);
+        assert!((sqrt(2.0) - std::f64::consts::SQRT_2).abs() < f64::EPSILON);
     }
 }
